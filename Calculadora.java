@@ -58,7 +58,7 @@ public class Calculadora<T> implements ICalculadora {
         if (!error) {
             System.out.println(stack.lastNode.getValue());
         } else {
-            System.out.println("Error, No es posible dentro de CERO");
+            //System.out.println("Error, No es posible dentro de CERO");
         }
     }
 
@@ -74,16 +74,26 @@ public class Calculadora<T> implements ICalculadora {
         throw new UnsupportedOperationException("Unimplemented method 'resta'");
     }
 
-    @Override
     public void multiplicacion() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'multiplicacion'");
+        T operandoA = (T) stack.pop();
+        T operandoB = (T) stack.pop();
+        int resultado = Integer.parseInt(String.valueOf(operandoA)) * Integer.parseInt(String.valueOf(operandoB));
+        stack.push(resultado);
     }
 
     @Override
     public boolean division() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'division'");
+        try {
+            T operandoA = (T) stack.pop();
+            T operandoB = (T) stack.pop();
+
+            int resultado = Integer.parseInt(String.valueOf(operandoA)) / Integer.parseInt(String.valueOf(operandoB));
+            stack.push(resultado);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error, No es posible dividir dentro de cero");
+            return false;
+        }
     }
 
     @Override
