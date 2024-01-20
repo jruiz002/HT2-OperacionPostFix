@@ -78,31 +78,46 @@ public class Calculadora<T> implements ICalculadora {
      */
     @Override
     public void sumar() {
+    if (stack.size() >= 2) {
         T operandoA = (T) stack.pop();
         T operandoB = (T) stack.pop();
         int resultado = Integer.parseInt(String.valueOf(operandoA)) + Integer.parseInt(String.valueOf(operandoB));
         stack.push(resultado);
+    } else {
+        System.out.println("Error: Insuficientes operandos para la suma.");
+        error = true;
     }
+}
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void resta() {
-        T operandoA = (T) stack.pop();
-        T operandoB = (T) stack.pop();
-        int resultado = Integer.parseInt(String.valueOf(operandoA)) - Integer.parseInt(String.valueOf(operandoB));
-        stack.push(resultado);
+        if (stack.size() >= 2) {
+            T operandoA = (T) stack.pop();
+            T operandoB = (T) stack.pop();
+            int resultado = Integer.parseInt(String.valueOf(operandoA)) - Integer.parseInt(String.valueOf(operandoB));
+            stack.push(resultado);
+        } else {
+            System.out.println("Error: Insuficientes operandos para la resta.");
+            error = true;
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public void multiplicacion() {
-        T operandoA = (T) stack.pop();
-        T operandoB = (T) stack.pop();
-        int resultado = Integer.parseInt(String.valueOf(operandoA)) * Integer.parseInt(String.valueOf(operandoB));
-        stack.push(resultado);
+        if (stack.size() >= 2) {
+            T operandoA = (T) stack.pop();
+            T operandoB = (T) stack.pop();
+            int resultado = Integer.parseInt(String.valueOf(operandoA)) * Integer.parseInt(String.valueOf(operandoB));
+            stack.push(resultado);
+        } else {
+            System.out.println("Error: Insuficientes operandos para la multiplicación.");
+            error = true;
+        }
     }
 
     /**
@@ -110,15 +125,22 @@ public class Calculadora<T> implements ICalculadora {
      */
     @Override
     public boolean division() {
-        try {
-            T operandoA = (T) stack.pop();
-            T operandoB = (T) stack.pop();
-
-            int resultado = Integer.parseInt(String.valueOf(operandoA)) / Integer.parseInt(String.valueOf(operandoB));
-            stack.push(resultado);
-            return true;
-        } catch (Exception e) {
-            System.out.println("Error, No es posible dividir dentro de cero");
+        if (stack.size() >= 2) {
+            try {
+                T operandoA = (T) stack.pop();
+                T operandoB = (T) stack.pop();
+    
+                int resultado = Integer.parseInt(String.valueOf(operandoA)) / Integer.parseInt(String.valueOf(operandoB));
+                stack.push(resultado);
+                return true;
+            } catch (Exception e) {
+                System.out.println("Error: No es posible dividir dentro de cero.");
+                error = true;
+                return false;
+            }
+        } else {
+            System.out.println("Error: Insuficientes operandos para la división.");
+            error = true;
             return false;
         }
     }
