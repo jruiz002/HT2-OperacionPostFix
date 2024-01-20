@@ -1,11 +1,19 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 
+/**
+ * Implementación de una calculadora básica usando una pila personalizada.
+ * 
+ * @param <T> el tipo de elementos en la calculadora.
+ */
 public class Calculadora<T> implements ICalculadora {
 
     private CustomStack stack = new CustomStack<>();
     private boolean error = false;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String readTXT() {
         try (FileReader fr = new FileReader("./datos.txt")) {
@@ -20,6 +28,9 @@ public class Calculadora<T> implements ICalculadora {
         return "";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void calculate() {
         String expresion = readTXT();
@@ -58,22 +69,35 @@ public class Calculadora<T> implements ICalculadora {
         if (!error) {
             System.out.println(stack.lastNode.getValue());
         } else {
-            //System.out.println("Error, No es posible dentro de CERO");
+            // System.out.println("Error, No es posible dentro de CERO");
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void sumar() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'sumar'");
+        T operandoA = (T) stack.pop();
+        T operandoB = (T) stack.pop();
+        int resultado = Integer.parseInt(String.valueOf(operandoA)) + Integer.parseInt(String.valueOf(operandoB));
+        stack.push(resultado);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void resta() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'resta'");
+        T operandoA = (T) stack.pop();
+        T operandoB = (T) stack.pop();
+        int resultado = Integer.parseInt(String.valueOf(operandoA)) - Integer.parseInt(String.valueOf(operandoB));
+        stack.push(resultado);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void multiplicacion() {
         T operandoA = (T) stack.pop();
         T operandoB = (T) stack.pop();
@@ -81,6 +105,9 @@ public class Calculadora<T> implements ICalculadora {
         stack.push(resultado);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean division() {
         try {
@@ -96,10 +123,17 @@ public class Calculadora<T> implements ICalculadora {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isNumeric(String value) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isNumeric'");
+        try {
+            // Intenta convertir el string a un número
+            Integer.parseInt(value);
+            return true; // Si no hay excepción, el string es un valor numérico
+        } catch (NumberFormatException e) {
+            return false; // Si hay excepción, el string no es un valor numérico
+        }
     }
-
 }

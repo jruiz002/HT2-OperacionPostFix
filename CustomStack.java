@@ -1,8 +1,16 @@
+/**
+ * Implementación de una pila personalizada.
+ * 
+ * @param <T> el tipo de elementos en la pila.
+ */
 public class CustomStack<T> implements ICustomStack<T> {
 
     protected Node<T> lastNode;
     protected Node<T> firstNode;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void push(T value) {
         if (lastNode == null) {
@@ -15,6 +23,9 @@ public class CustomStack<T> implements ICustomStack<T> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public T pop() {
         if (lastNode != null) {
@@ -32,5 +43,4 @@ public class CustomStack<T> implements ICustomStack<T> {
             return null;
         }
     }
-
 }
