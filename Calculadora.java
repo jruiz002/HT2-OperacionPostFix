@@ -11,6 +11,12 @@ public class Calculadora<T> implements ICalculadora {
     private CustomStack stack = new CustomStack<>();
     private boolean error = false;
 
+    public Calculadora(CustomStack stack){
+        this.stack = stack;
+    }
+
+    public Calculadora(){}
+
     /**
      * {@inheritDoc}
      */
@@ -69,7 +75,7 @@ public class Calculadora<T> implements ICalculadora {
         if (!error) {
             System.out.println(stack.lastNode.getValue());
         } else {
-            // System.out.println("Error, No es posible dentro de CERO");
+            System.out.println("Error, No es posible dentro de CERO");
         }
     }
 
@@ -77,47 +83,54 @@ public class Calculadora<T> implements ICalculadora {
      * {@inheritDoc}
      */
     @Override
-    public void sumar() {
-    if (stack.size() >= 2) {
-        T operandoA = (T) stack.pop();
-        T operandoB = (T) stack.pop();
-        int resultado = Integer.parseInt(String.valueOf(operandoA)) + Integer.parseInt(String.valueOf(operandoB));
-        stack.push(resultado);
-    } else {
-        System.out.println("Error: Insuficientes operandos para la suma.");
-        error = true;
+    public int sumar() {
+        if (stack.size() >= 2) {
+            T operandoA = (T) stack.pop();
+            T operandoB = (T) stack.pop();
+            int resultado = Integer.parseInt(String.valueOf(operandoA)) + Integer.parseInt(String.valueOf(operandoB));
+            stack.push(resultado);
+            return resultado;
+        } else {
+            System.out.println("Error: Insuficientes operandos para la suma.");
+            error = true;
+        }
+        return 0;
+
     }
-}
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void resta() {
+    public int resta() {
         if (stack.size() >= 2) {
             T operandoA = (T) stack.pop();
             T operandoB = (T) stack.pop();
             int resultado = Integer.parseInt(String.valueOf(operandoA)) - Integer.parseInt(String.valueOf(operandoB));
             stack.push(resultado);
+            return resultado;
         } else {
             System.out.println("Error: Insuficientes operandos para la resta.");
             error = true;
         }
+        return 0;
     }
 
     /**
      * {@inheritDoc}
      */
-    public void multiplicacion() {
+    public int multiplicacion() {
         if (stack.size() >= 2) {
             T operandoA = (T) stack.pop();
             T operandoB = (T) stack.pop();
             int resultado = Integer.parseInt(String.valueOf(operandoA)) * Integer.parseInt(String.valueOf(operandoB));
             stack.push(resultado);
+            return resultado;
         } else {
             System.out.println("Error: Insuficientes operandos para la multiplicación.");
             error = true;
         }
+        return 0;
     }
 
     /**
@@ -129,8 +142,9 @@ public class Calculadora<T> implements ICalculadora {
             try {
                 T operandoA = (T) stack.pop();
                 T operandoB = (T) stack.pop();
-    
-                int resultado = Integer.parseInt(String.valueOf(operandoA)) / Integer.parseInt(String.valueOf(operandoB));
+
+                int resultado = Integer.parseInt(String.valueOf(operandoA))
+                        / Integer.parseInt(String.valueOf(operandoB));
                 stack.push(resultado);
                 return true;
             } catch (Exception e) {

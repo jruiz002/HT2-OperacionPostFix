@@ -45,12 +45,12 @@ public class CustomStack<T> implements ICustomStack<T> {
     }
 
     public int size() {
-    int count = 0;
-    Node<T> current = firstNode;
-    while (current != null) {
-        count++;
-        current = current.getNext();
+        int count = 0;
+        Node<T> current = firstNode;
+        while (current != null) {
+            count++;
+            current = current.getNext();
+        }
+        return count;
     }
-    return count;
-}
 }

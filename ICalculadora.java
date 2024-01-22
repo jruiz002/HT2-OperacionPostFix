@@ -10,17 +10,17 @@ public interface ICalculadora {
     /**
      * Suma dos operandos de la pila.
      */
-    public void sumar();
+    public int sumar();
 
     /**
     * Resta dos operandos de la pila.
     */
-    public void resta();
+    public int resta();
 
     /**
      * Multiplica dos operandos de la pila.
      */
-    public void multiplicacion();
+    public int multiplicacion();
 
     /**
      * Divide dos operandos de la pila.
