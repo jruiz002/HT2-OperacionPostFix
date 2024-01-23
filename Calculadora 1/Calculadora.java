@@ -74,7 +74,9 @@ public class Calculadora<T> implements ICalculadora {
 
         }
         if (!error) {
-            System.out.println("Resultado: " + stack.lastNode.getValue());
+            System.out.println();
+            System.out.println("Resultado operación postfix: " + stack.lastNode.getValue());
+            System.out.println();
         } else {
             System.out.println("Error, No es posible dentro de CERO");
         }
