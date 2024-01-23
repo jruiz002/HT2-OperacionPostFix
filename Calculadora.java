@@ -11,11 +11,12 @@ public class Calculadora<T> implements ICalculadora {
     private CustomStack stack = new CustomStack<>();
     private boolean error = false;
 
-    public Calculadora(CustomStack stack){
+    public Calculadora(CustomStack stack) {
         this.stack = stack;
     }
 
-    public Calculadora(){}
+    public Calculadora() {
+    }
 
     /**
      * {@inheritDoc}
@@ -143,10 +144,11 @@ public class Calculadora<T> implements ICalculadora {
                 T operandoA = (T) stack.pop();
                 T operandoB = (T) stack.pop();
 
-                int resultado = Integer.parseInt(String.valueOf(operandoA))
-                        / Integer.parseInt(String.valueOf(operandoB));
+                int resultado = Integer.parseInt(String.valueOf(operandoB))
+                        / Integer.parseInt(String.valueOf(operandoA));
                 stack.push(resultado);
                 return true;
+
             } catch (Exception e) {
                 System.out.println("Error: No es posible dividir dentro de cero.");
                 error = true;
@@ -171,5 +173,14 @@ public class Calculadora<T> implements ICalculadora {
         } catch (NumberFormatException e) {
             return false; // Si hay excepción, el string no es un valor numérico
         }
+    }
+
+    /**
+     * Obtiene la pila utilizada por la calculadora.
+     * 
+     * @return La pila utilizada por la calculadora.
+     */
+    public CustomStack<T> getStack() {
+        return stack;
     }
 }

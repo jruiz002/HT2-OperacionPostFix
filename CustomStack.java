@@ -44,6 +44,11 @@ public class CustomStack<T> implements ICustomStack<T> {
         }
     }
 
+    /**
+     * Obtiene el tamaño actual de la pila.
+     * 
+     * @return El tamaño de la pila.
+     */
     public int size() {
         int count = 0;
         Node<T> current = firstNode;
@@ -52,5 +57,15 @@ public class CustomStack<T> implements ICustomStack<T> {
             current = current.getNext();
         }
         return count;
+    }
+
+    /**
+     * Extrae y devuelve el elemento superior de la pila como una cadena.
+     * 
+     * @return El elemento superior de la pila como cadena, o null si la pila está vacía.
+     */
+    public String popAsString() {
+        T value = pop();
+        return value != null ? String.valueOf(value) : null;
     }
 }
