@@ -74,7 +74,7 @@ public class Calculadora<T> implements ICalculadora {
 
         }
         if (!error) {
-            System.out.println(stack.lastNode.getValue());
+            System.out.println("Resultado: " + stack.lastNode.getValue());
         } else {
             System.out.println("Error, No es posible dentro de CERO");
         }
