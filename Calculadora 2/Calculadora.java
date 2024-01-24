@@ -22,8 +22,8 @@ public class Calculadora implements ICalculadora {
         this.stack = stack;
     }
 
-    public Calculadora (){}
-
+    public Calculadora(){
+    }
  /**
      * La función calculate procesa una expresión matemática en notación postfix
      * (postfija) utilizando la pila de enteros. La expresión debe estar formateada
@@ -64,7 +64,7 @@ public class Calculadora implements ICalculadora {
                             stack.push(multiplicacion());
                             break;
                         case "/":
-                            stack.push(division());
+                            division();
                             break;
                         default:
                             throw new IllegalArgumentException("Operador no válido: " + token);
@@ -144,13 +144,24 @@ public class Calculadora implements ICalculadora {
     /*
      * Realiza la operación de resta tomando dos operandos de la pila.
      */
-    public int division() {
-        Integer operandoB = stack.pop();
-        Integer operandoA = stack.pop();
-        if (operandoA != null && operandoB != null && operandoB != 0) {
-            return operandoA / operandoB;
-        } else {
-            throw new IllegalArgumentException("Faltan operandos o división por cero.");
+    public boolean division() {
+        try {
+            Object operandoB = stack.pop();
+            Object operandoA = stack.pop();
+            if (operandoA instanceof Integer && operandoB instanceof Integer) {
+                Integer a = (Integer) operandoA;
+                Integer b = (Integer) operandoB;
+                if (b != 0) {
+                    stack.push(a / b);
+                    return true;
+                } else {
+                    throw new ArithmeticException("División por cero.");
+                }
+            } else {
+                throw new IllegalArgumentException("Operandos no válidos para la operación de división.");
+            }
+        } catch (NullPointerException e) {
+            throw new IllegalStateException("La pila está vacía, no hay suficientes operandos para la operación de división.");
         }
     }
 

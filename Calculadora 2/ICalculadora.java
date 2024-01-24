@@ -27,7 +27,7 @@ public interface ICalculadora {
      * 
      * @return true si la división es exitosa, false en caso contrario.
      */
-    public int division();
+    public boolean division();
 
     /**
      * Lee una expresión desde un archivo de texto.
